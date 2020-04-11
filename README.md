@@ -1,4 +1,4 @@
 # cs461
-Capstone Project - Underwater ROV
+Capstone Project - Iceberg Explorer
 
 ADDIIIIIING
