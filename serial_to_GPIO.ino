@@ -16,9 +16,12 @@ void loop() {
     // read the incoming byte:
     incoming = Serial.readString();
 
+    // Check if the strings starts with "on" (meaning enable that pin) or "of" (meaning disable that pin)
     if (incoming.substring(0, 2) == "on") {
+      // Get the number that they sent alongside the command ("on XX")
       int pin = incoming.substring(3, 5).toInt();
       
+      // Check to make sure the pin number works, and enable it if it does, then print that number back out
       if (pin < 1 || pin > 13) {
         Serial.println("error: pin# out of range (should be 1-13)");
       } else {
@@ -28,8 +31,10 @@ void loop() {
         
       }
     } else if (incoming.substring(0, 2) == "of") {
+      // Get the number that they sent alongside the command ("of XX")
       int pin = incoming.substring(3, 5).toInt();
       
+      // Check to make sure the pin number works, and enable it if it does, then print that number back outs
       if (pin < 1 || pin > 13) {
         Serial.println("error: pin# out of range (should be 1-13)");
       } else {

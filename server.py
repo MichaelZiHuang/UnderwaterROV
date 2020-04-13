@@ -12,9 +12,11 @@ def send_serial(cmd):
     print("Sending command to arduino: ", end="")
     ardu.write(cmd.encode())
     # time.sleep(1)
+
+    # The arduino sends back whether or not it recieved to command correctly
+    # If it sends something with "Error" in it then it failed, otherwise it succeeded
     line = ardu.readline()
     print(line.decode().strip())
-
     if "Error" in line.decode().strip():
         return 1
     else:
@@ -48,9 +50,11 @@ while True:
     c, addr = s.accept()      
     print('Got connection from', addr) 
     
-    # send a thank you message to the client.  
+    # recieve the sent command
     cmd = c.recv(1024) 
+    # send the decoded command to our enslaved controller
     res = send_serial(cmd.decode())
+    # if we got a 0 it recieved the command, otherwise not sure
     if res > 0:
         c.send("fail".encode())
     else:

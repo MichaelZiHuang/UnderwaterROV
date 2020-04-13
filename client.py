@@ -37,6 +37,9 @@ def send_serial(pin, state_to):
     else:
         return 2 
 
+# Define dictionaries to hold the pin numbers and states of the legs that correspond to the graphical names
+# Pin numbers are the pin numbers that are sent to the arduino, so these would need to be changed if hardware changed
+# For the states, False means off, True means on
 legs_to_iopins = {'Leg 1 Forward': 1,
                   'Leg 2 Forward': 2,
                   'Leg 3 Forward': 3,
@@ -59,6 +62,7 @@ class HeaterGUI:
         self.label = Label(master, text="This is our first GUI!")
         self.label.pack()
 
+        # Initialize buttons for each leg
         self.buttons = {}
         for leg in legs_to_iopins:
             self.buttons[leg] = Button(master, text=leg, command=lambda x=leg: self.toggle_leg(x), bg="red")
@@ -68,8 +72,10 @@ class HeaterGUI:
         self.close_button.pack()
 
     def toggle_leg(self, leg):
+        # Send the pin number to the arduino 
         res = send_serial(legs_to_iopins[leg], not legs_to_state[leg])
 
+        # Check to make the arduino recieved the pin
         if res == 0:
             # Success, change state and color
             legs_to_state[leg] = not legs_to_state[leg]
