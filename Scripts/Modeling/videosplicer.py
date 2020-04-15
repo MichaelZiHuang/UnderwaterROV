@@ -1,15 +1,16 @@
 import cv2
 import argparse
 import os
-
+#gets any number of arguments from the user
+#each arguments should be the name of a .mp4 video file
 parser = argparse.ArgumentParser()
 parser.add_argument('videos', nargs='*')
 args = parser.parse_args()
 
 render_directories = []
 
-# print(os.environ["VIDEOFOLDER"])
-
+# For each video that was passed in the args
+#it will go frome by frame and place each frame as a .jpg in a directory that corresponds to the video file name
 for video in args.videos:
     vidcap = cv2.VideoCapture(video)
     success,image = vidcap.read()
@@ -34,10 +35,10 @@ for video in args.videos:
         print('Read a new frame: ' + str(count), success)
         count += 1
 print("*****************************************")
+
 # print("In Bash Shell Run the command: export VIDEOFOLDER='" + os.getcwd() + "'")
+#The following print statement allows the user to know what exactly to type into the console in agisoft
 print("In the agisoft console: run the createModel.py script with the arguments:\n--image_folder " + os.getcwd(), end=' ')
 for folder in render_directories:
     print(folder, end=' ')
 print()
-# os.environ["VIDEOFOLDER"] = os.getcwd()
-# print(os.environ["VIDEOFOLDER"])
