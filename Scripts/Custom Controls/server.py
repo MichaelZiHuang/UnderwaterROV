@@ -3,24 +3,25 @@ import serial
 import socket   
 
 print("Connecting to arduino: ", end="")
-ardu= serial.Serial('COM3',9600)#, timeout=.1)
-line = ardu.readline()
-print(line.decode().strip())
+ardu = serial.Serial('COM4',9600)#, timeout=.1)
+# line = ardu.readline()
+# print(line.decode().strip())
 
 def send_serial(cmd):
     # time.sleep(5)
     print("Sending command to arduino: ", end="")
-    ardu.write(cmd.encode())
+    ardu.write((cmd+'\r').encode())
     # time.sleep(1)
 
     # The arduino sends back whether or not it recieved to command correctly
     # If it sends something with "Error" in it then it failed, otherwise it succeeded
-    line = ardu.readline()
-    print(line.decode().strip())
-    if "Error" in line.decode().strip():
-        return 1
-    else:
-        return 0
+    # line = ardu.readline()
+    # print(line.decode().strip())
+    print("done")
+    # if "Error" in line.decode().strip():
+    #     return 1
+    # else:
+    return 0
 
 # next create a socket object 
 s = socket.socket()          
@@ -53,7 +54,9 @@ while True:
     # recieve the sent command
     cmd = c.recv(1024) 
     # send the decoded command to our enslaved controller
+    print("sending")
     res = send_serial(cmd.decode())
+    print("res: ", res)
     # if we got a 0 it recieved the command, otherwise not sure
     if res > 0:
         c.send("fail".encode())

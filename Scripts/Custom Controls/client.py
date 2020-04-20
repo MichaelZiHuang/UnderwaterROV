@@ -7,9 +7,8 @@ from tkinter import Tk, Label, Button
 port = 3480                 
   
 # Sends a serial message to a remove server on the BlueROV, which sends the message to the heater controller
-# Format: "on pin#" to turn on, "of pin#" to turn off. pin# range 1-12 currently with arduino nano
-# pin: pin number to change
-# state_to: state we want to change the pin to (False for off, True for on)
+# Format: See user guide for SSC-32u at https://www.robotshop.com/en/lynxmotion-ssc-32u-usb-servo-controller.html
+#         (format could also be changed to work with any controller that takes serial input, this is just what we used)
 def send_serial(pin, state_to):
     # Create a socket object 
     s = socket.socket()  
@@ -18,9 +17,9 @@ def send_serial(pin, state_to):
     s.connect(('127.0.0.1', port)) 
 
     if state_to:
-        cmd = "on " + str(pin)
+        cmd = "#" + str(pin) + "H"
     else:
-        cmd = "of " + str(pin)
+        cmd = "#" + str(pin) + "L"
 
     s.send(cmd.encode())
     # receive data from the server 
@@ -40,12 +39,12 @@ def send_serial(pin, state_to):
 # Define dictionaries to hold the pin numbers and states of the legs that correspond to the graphical names
 # Pin numbers are the pin numbers that are sent to the arduino, so these would need to be changed if hardware changed
 # For the states, False means off, True means on
-legs_to_iopins = {'Leg 1 Forward': 1,
-                  'Leg 2 Forward': 2,
-                  'Leg 3 Forward': 3,
-                  'Leg 1 Back': 4,
-                  'Leg 2 Back': 5,
-                  'Leg 3 Back': 6}
+legs_to_iopins = {'Leg 1 Forward': 0,
+                  'Leg 2 Forward': 1,
+                  'Leg 3 Forward': 2,
+                  'Leg 1 Back': 3,
+                  'Leg 2 Back': 4,
+                  'Leg 3 Back': 5}
 
 legs_to_state = {'Leg 1 Forward': False,
                   'Leg 2 Forward': False,
