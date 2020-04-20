@@ -7,7 +7,7 @@ This project will focuses on expanding an already existing proposal by our clien
 To Do:
 * Custom Controls with IC32 Hardware
 
-<p> With the advent of the COVID-19, the staus of this project and its future are in its deciding moments. This team works alongside a team of Electrical Engineers whom's working ability has been significantly hampered by the recent events. While this does not mean we cannot continue, this does mean that future plans and goals may need to change.</p>
+<p> With the advent of the COVID-19, the goals of this project have changed significantly. We still plan on completing the above To-do:
 
 <h1>How to Run</h1>
 This software requires both hardware and software to run, these are notably as follows:
