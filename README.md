@@ -20,6 +20,8 @@ Hardware:
 * Arduino or an otherwise developed system
 * A camera OR pre-recorded video
 
+<h1><Custom Controls</h1>
+
 The custom control software contains three seperate pieces that work together to send signals to a relay controller.
 The client.py program contains the graphical interface for a user to enable or disable relay controls. 
 The server.py program is connected to by the client.py program, and acts as a passthrough to send commands from client.py to the hardware controller. 
@@ -28,3 +30,6 @@ Instructions for running the custom control software:
 1. Start the server by running "py server.py". The server script should have connected to the serial device, and will be waiting for a connection from the client. 
 2. Start the client by running "py client.py". The client will open up a GUI and will wait for user input
 3. Pressing a button on the client GUI will create a connection to the server, and send a command to switch that corresponding pin. The pin on the serial device should then be switched, and the color of the button in the GUI should change between red and green, indicating off and on.
+
+
+<h1>Agisoft Demo</h1>
