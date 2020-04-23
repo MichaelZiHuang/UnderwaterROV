@@ -20,7 +20,7 @@ Hardware:
 * Arduino or an otherwise developed system
 * A camera OR pre-recorded video
 
-<h1>Current Status</h1>
+<h1>Custom Controls</h1>
 
 The custom control software contains three seperate pieces that work together to send signals to a relay controller.
 The client.py program contains the graphical interface for a user to enable or disable relay controls. 
