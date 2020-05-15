@@ -1,3 +1,14 @@
+'''
+server.py
+Designed by the BlueROV2 Iceberg Explorer CS capstone team for Jonathan Nash
+
+This server is designed to be a network-attached passthrough that recieves signals from client.py.
+This script will run on the BlueROV2's built in raspberry pi, and will interpret and pass signals 
+through to a microcontroller that we put in place for this system, to allow for the remote user to
+control custom ECE circuits through an attached series of electrical relays. The two scripts communicate 
+using a simple TCP connection over the local network that the BlueROV2 already uses for it's control system.
+'''
+
 import time
 import serial
 import socket   
@@ -12,23 +23,27 @@ def send_serial(cmd):
     print("Sending command to arduino: ", end="")
     ardu.write((cmd+'\r').encode())
     # time.sleep(1)
+    
+    print("done")
 
+    # *** For use with arduino, not currently needed ***
     # The arduino sends back whether or not it recieved to command correctly
     # If it sends something with "Error" in it then it failed, otherwise it succeeded
+    # This code was here for use with serial_to_GPIO.ino arduino code, not needed with the SSC-32U
     # line = ardu.readline()
     # print(line.decode().strip())
-    print("done")
     # if "Error" in line.decode().strip():
     #     return 1
     # else:
+    # *** END arduino error checking ***
     return 0
 
 # next create a socket object 
 s = socket.socket()          
 print("Socket successfully created")
   
-# reserve a port on your computer in our 
-# case it is 12345 but it can be anything 
+# reserve a port on your computer
+# corresponds with client.py port
 port = 3480                
   
 # Next bind to the port 
@@ -66,5 +81,4 @@ while True:
     # Close the connection with the client 
     c.close() 
 
-# TODO will never reach here
 ardu.close() 

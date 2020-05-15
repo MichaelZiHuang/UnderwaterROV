@@ -1,3 +1,14 @@
+'''
+client.py
+Designed by the BlueROV2 Iceberg Explorer CS capstone team for Jonathan Nash
+
+This client is designed to be the controllable GUI for a system to add arbitrary HI/LO signal controls
+to the BlueROV to allow the ECE team to add controllable systems to the BlueROV2. This script is meant 
+to work in conjunction with server.py. This script will run on the user's computer, while server.py
+will run on the BlueROV2's built in raspberry pi. The two communicate using a simple TCP connection
+over the local network that the BlueROV2 already uses for it's control system.
+'''
+
 # Import socket module 
 import socket  
 from tkinter import Tk, Label, Button       
@@ -6,10 +17,12 @@ from tkinter import Tk, Label, Button
 # Define the port on which you want to connect 
 port = 3480                 
   
-# Sends a serial message to a remove server on the BlueROV, which sends the message to the heater controller
-# Format: See user guide for SSC-32u at https://www.robotshop.com/en/lynxmotion-ssc-32u-usb-servo-controller.html
-#         (format could also be changed to work with any controller that takes serial input, this is just what we used)
 def send_serial(pin, state_to):
+    '''
+    Sends a serial message to a remove server on the BlueROV, which sends the message to the heater controller
+    Format: See user guide for SSC-32u at https://www.robotshop.com/en/lynxmotion-ssc-32u-usb-servo-controller.html
+            (format could also be changed to work with any controller that takes serial input, this is just what we used)
+    '''
     # Create a socket object 
     s = socket.socket()  
 
@@ -54,6 +67,12 @@ legs_to_state = {'Leg 1 Forward': False,
                   'Leg 3 Back': False}
 
 class HeaterGUI:
+    '''
+    Description: Tkinter GUI that is meant to control heater elements designed to be attached to the BlueROV2,
+        controlled through a series of electrical relay switches. This class creates a series of buttons;
+        each button will send a signal to server.py which will send a signal to a microcontroller that will
+        flip a signal and enable or disable a relay, which will trigger the heater attachment mechanism.
+    '''
     def __init__(self, master):
         self.master = master
         master.title("A simple GUI")
