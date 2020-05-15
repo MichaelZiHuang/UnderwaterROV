@@ -30,5 +30,6 @@ for folder in args.folders:
     chunk.addPhotos(myphotos)
     chunk.matchPhotos()
     chunk.alignCameras()
+    chunk.buildDepthMaps()
     chunk.buildDenseCloud()
 doc.save(currentDate)
