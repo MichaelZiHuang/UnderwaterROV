@@ -6,6 +6,9 @@ This project will focuses on expanding an already existing proposal by our clien
 * Custom Controls require physical pairing with ROV
 * Agisoft requires additional accuracy tests
 
+<h1>Code Review Feedback<h1>
+ On May 4th, our Team participated in a Code Review where 2 other teams critiqued our design. One of the criqitues was cryptic code. We've addressed this by adding more comments to our design and removing deprecated code in our design (particularly in script.py)
+
 <h1>How to Run</h1>
 This software requires both hardware and software to run, these are notably as follows:
 
